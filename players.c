@@ -10,10 +10,6 @@
 #include <string.h>
 #include "players.h"
 
-struct player {
-    char name[27];
-    int score; 
-};
 
 // Returns true if the player name matches one of the existing players
 bool player_exists(player *players, int num_players, char *name)
