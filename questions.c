@@ -11,11 +11,10 @@
 #include <string.h>
 #include "questions.h"
 #define STR_LEN 256
-// Initializes the array of questions for the game
 
+// Initializes the array of questions for the game
 void initialize_game(void)
 {
-    // Programming (4)
     strcpy(questions[0].category, "programming");
     strcpy(questions[0].question, "What keyword is used to define a function in C?");
     strcpy(questions[0].answer, "void");
@@ -43,10 +42,23 @@ void initialize_game(void)
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
+// Displays each of the remaining categories and question dollar values that have not been answered
 void display_categories(void)
 {
-    // print categories and dollar values for each unanswered question in questions array
+    printf("\nAvailable Questions:\n");
+
+    for (int i = 0; i < NUM_QUESTIONS; i++)
+    {
+        if (!questions[i].answered)
+        {
+            printf("Category: %s | Value: %d\n",
+                questions[i].category,
+                questions[i].value);
+        }
+    }
+    printf("\n");
 }
+
 
 // Displays the question for the category and dollar value
 
