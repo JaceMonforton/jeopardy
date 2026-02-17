@@ -32,3 +32,8 @@ void update_score(player *players, int num_players, char *name, int score)
         }
     }
 }
+
+void initialize_player(player *player, char *name) {
+    strcpy(player->name, name);
+    player->score = 0;
+}

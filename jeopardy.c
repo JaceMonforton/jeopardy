@@ -60,7 +60,7 @@ void show_results(player *players, int num_players)
 }
 
 
-int main(int argc, char *argv[])
+int main()
 {
     player players[NUM_PLAYERS];
     char buffer[BUFFER_LEN] = {0};
@@ -124,7 +124,6 @@ int main(int argc, char *argv[])
         else
         {
             printf("Incorrect!\n");
-            decrease_score(&players[player_index - 1], value);
         }
 
         questions_remaining--;

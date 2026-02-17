@@ -25,4 +25,6 @@ extern bool player_exists(player *players, int num_players, char *name);
 // player given their name
 extern void update_score(player *players, int num_players, char *name, int score);
 
+extern void initialize_player(player *players, char *buffer);
+
 #endif /* PLAYERS_H_ */

@@ -15,6 +15,7 @@
 // Initializes the array of questions for the game
 void initialize_game(void)
 {
+
     strcpy(questions[0].category, "programming");
     strcpy(questions[0].question, "What keyword is used to define a function in C?");
     strcpy(questions[0].answer, "void");
@@ -47,14 +48,9 @@ void display_categories(void)
 {
     printf("\nAvailable Questions:\n");
 
-    for (int i = 0; i < NUM_QUESTIONS; i++)
+    for (int i = 0; i < NUM_CATEGORIES; i++)
     {
-        if (!questions[i].answered)
-        {
-            printf("Category: %s | Value: %d\n",
-                questions[i].category,
-                questions[i].value);
-        }
+        printf("Category: %s", categories[i]);
     }
     printf("\n");
 }
