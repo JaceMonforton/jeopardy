@@ -23,6 +23,7 @@ static char categories[NUM_CATEGORIES][MAX_LEN] = {
     "databases"
 };
 
+
 // Questions struct for each question
 typedef struct {
     char category[MAX_LEN];
@@ -30,17 +31,21 @@ typedef struct {
     char answer[MAX_LEN];
     int value;
     bool answered;
-} q;
+} question;
 
 // An array of 12 questions (4 for each category), initialized in initialize_game
 // this may need to be a pointer if you want it set dynamically
-q questions[NUM_QUESTIONS];
+extern question questions[NUM_QUESTIONS];
 
 // Initializes the array of questions for the game
 extern void initialize_game(void);
 
 // Displays each of the remaining categories and question dollar values that have not been answered
 extern void display_categories(void);
+
+extern bool valid_category(char *category);
+
+extern bool valid_value(int value);
 
 // Displays the question for the category and dollar value
 extern void display_question(char *category, int value);

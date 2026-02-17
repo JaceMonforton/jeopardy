@@ -17,18 +17,23 @@
 #define BUFFER_LEN 256
 #define NUM_PLAYERS 4
 
+
 // Put global environment variables here
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
 void tokenize(char *input, char **tokens)
 {
-    char *token = strtok(input, " \n");
 
+    // Returns first token
+    char* token = strtok(input, " ");
+
+    // Keep printing tokens while one of the
+    // delimiters present in str[].
     int i = 0;
-    while (token != NULL && i < 3)
-    {
+    while (!token == NULL && i < 3) {
+        printf(" %s\n", token);
         tokens[i++] = token;
-        token = strtok(NULL, " \n");
+        token = strtok(NULL, " ");
     }
 }
 
@@ -76,7 +81,7 @@ int main()
         printf("Enter name for player %d: ", i + 1);
         fgets(buffer, BUFFER_LEN, stdin);
         buffer[strcspn(buffer, "\n")] = '\0'; // remove newline
-        initialize_player(&players[i], buffer);
+        initialize_player(players, buffer, i);
     }
 
     int questions_remaining = NUM_QUESTIONS;
@@ -85,21 +90,38 @@ int main()
     {
         display_categories();
 
-        int player_index;
         char category[BUFFER_LEN];
+        char name[BUFFER_LEN];
         int value;
 
-        printf("Player number (1-%d): ", NUM_PLAYERS);
-        scanf("%d", &player_index);
-        getchar(); // clear newline
+        printf("Who will answer?: ");
+        fgets(name, BUFFER_LEN, stdin);
+        name[strcspn(name, "\n")] = '\0';
+
+        if (!player_exists(players, NUM_PLAYERS, name)) {
+            printf("%s is not a player\n", name);
+            continue;
+        }
 
         printf("Enter category: ");
         fgets(category, BUFFER_LEN, stdin);
         category[strcspn(category, "\n")] = '\0';
 
+        if (!valid_category(category))
+        {
+            printf("Idk what that is.\n");
+            continue;
+        }
+
         printf("Enter value: ");
         scanf("%d", &value);
         getchar();
+
+        if (!valid_value(value))
+        {
+            printf("Wrong option\n");
+            continue;
+        }
 
         if (already_answered(category, value))
         {
@@ -114,15 +136,20 @@ int main()
 
         tokenize(buffer, tokens);
 
-        char *final_answer = tokens[2];
+        if (sizeof(tokens) / sizeof(tokens[0]) == 3) {
+            char *final_answer = tokens[2];
 
-        if (valid_answer(category, value, final_answer))
-        {
-            printf("Correct!\n");
-            update_score(players, NUM_PLAYERS, players[player_index - 1].name, value);
+            if (valid_answer(category, value, final_answer))
+            {
+                printf("Correct!\n");
+                update_score(players, NUM_PLAYERS, name, value);
+            }
+            else
+            {
+                printf("Incorrect!\n");
+            }
         }
-        else
-        {
+        else {
             printf("Incorrect!\n");
         }
 

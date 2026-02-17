@@ -15,7 +15,7 @@
 bool player_exists(player *players, int num_players, char *name)
 {
     for (int i = 0; i < num_players; i ++) {
-        if (players[i].name == name) {
+        if (strcmp(players[i].name, name) == 0) {
             return true;
         }
     }
@@ -33,7 +33,7 @@ void update_score(player *players, int num_players, char *name, int score)
     }
 }
 
-void initialize_player(player *player, char *name) {
-    strcpy(player->name, name);
-    player->score = 0;
+void initialize_player(player *players, char *name, int i) {
+    strcpy(players[i].name, name);
+    players[i].score = 0;
 }
