@@ -42,51 +42,51 @@ void initialize_game(void)
 
 
     strcpy(questions[4].category, "algorithms");
-    strcpy(questions[4].question, "Q1?");
-    strcpy(questions[4].answer, "A1");
+    strcpy(questions[4].question, "There is only one algorithm for a specific task. true or false?");
+    strcpy(questions[4].answer, "false");
     questions[4].value = 100;
     questions[4].answered = false;
 
     strcpy(questions[5].category, "algorithms");
-    strcpy(questions[5].question, "Q2?");
-    strcpy(questions[5].answer, "A2");
+    strcpy(questions[5].question, "O(n) is in what time complexity?");
+    strcpy(questions[5].answer, "linear");
     questions[5].value = 200;
     questions[5].answered = false;
 
     strcpy(questions[6].category, "algorithms");
-    strcpy(questions[6].question, "Q3?");
-    strcpy(questions[6].answer, "A3");
+    strcpy(questions[6].question, "say hi");
+    strcpy(questions[6].answer, "hi");
     questions[6].value = 300;
     questions[6].answered = false;
 
     strcpy(questions[7].category, "algorithms");
-    strcpy(questions[7].question, "Q4?");
-    strcpy(questions[7].answer, "A4");
+    strcpy(questions[7].question, "what starts with b and rhymes with ubble?");
+    strcpy(questions[7].answer, "bubble");
     questions[7].value = 400;
     questions[7].answered = false;
 
 
     strcpy(questions[8].category, "databases");
-    strcpy(questions[8].question, "Q1?");
-    strcpy(questions[8].answer, "A1");
+    strcpy(questions[8].question, "What starts with S and ends with QL?");
+    strcpy(questions[8].answer, "SQL");
     questions[8].value = 100;
     questions[8].answered = false;
 
     strcpy(questions[9].category, "databases");
-    strcpy(questions[9].question, "Q2?");
-    strcpy(questions[9].answer, "A2");
+    strcpy(questions[9].question, "What is all of the information about one person or one thing called?");
+    strcpy(questions[9].answer, "record");
     questions[9].value = 200;
     questions[9].answered = false;
 
     strcpy(questions[10].category, "databases");
-    strcpy(questions[10].question, "Q3?");
-    strcpy(questions[10].answer, "A3");
+    strcpy(questions[10].question, "Which of the following stores all of the data in the database?");
+    strcpy(questions[10].answer, "table");
     questions[10].value = 300;
     questions[10].answered = false;
 
     strcpy(questions[11].category, "databases");
-    strcpy(questions[11].question, "Q4?");
-    strcpy(questions[11].answer, "A4");
+    strcpy(questions[11].question, "idk just type 'hello'");
+    strcpy(questions[11].answer, "hello");
     questions[11].value = 400;
     questions[11].answered = false;
 
@@ -171,7 +171,7 @@ bool already_answered(char *category, int value)
     for (int i = 0; i < NUM_QUESTIONS; i++)
     {
         if (strcmp(questions[i].category, category) == 0 &&
-            questions[i].value == value && !questions[i].answered)
+            questions[i].value == value)
         {
             return questions[i].answered;
         }

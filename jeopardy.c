@@ -21,7 +21,7 @@
 // Put global environment variables here
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
-void tokenize(char *input, char **tokens)
+int tokenize(char *input, char **tokens, int i)
 {
 
     // Returns first token
@@ -29,12 +29,12 @@ void tokenize(char *input, char **tokens)
 
     // Keep printing tokens while one of the
     // delimiters present in str[].
-    int i = 0;
-    while (!token == NULL && i < 3) {
-        printf(" %s\n", token);
+    while (token != NULL && i < 3) {
+        token[strcspn(token, "\r\n")] = '\0';
         tokens[i++] = token;
         token = strtok(NULL, " ");
     }
+    return i;
 }
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
@@ -57,7 +57,7 @@ void show_results(player *players, int num_players)
     printf("\n=== FINAL RESULTS ===\n");
     for (int i = 0; i < num_players; i++)
     {
-        printf("%d. %s — %d points\n",
+        printf("%d. %s - %d points\n",
             i + 1,
             players[i].name,
             players[i].score);
@@ -134,15 +134,17 @@ int main()
         printf("Your answer: ");
         fgets(buffer, BUFFER_LEN, stdin);
 
-        tokenize(buffer, tokens);
+        int i = 0;
+        i = tokenize(buffer, tokens, i);
 
-        if (sizeof(tokens) / sizeof(tokens[0]) == 3) {
+        if (tokens[2] != NULL && i == 3) {
             char *final_answer = tokens[2];
 
             if (valid_answer(category, value, final_answer))
             {
                 printf("Correct!\n");
                 update_score(players, NUM_PLAYERS, name, value);
+                questions_remaining--;
             }
             else
             {
@@ -153,9 +155,9 @@ int main()
             printf("Incorrect!\n");
         }
 
-        questions_remaining--;
     }
 
     show_results(players, NUM_PLAYERS);
+    getchar();
     return EXIT_SUCCESS;
 }
